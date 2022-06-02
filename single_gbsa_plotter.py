@@ -41,7 +41,7 @@ class Plotter:
         plt.xlabel('Residues', labelpad=30)
         plt.ylabel('Kcal/mol', labelpad=15)
         plt.tight_layout()
-        plt.savefig('ligand_gbsa.jpg')
+        plt.savefig('ligand_gbsa.jpg', dpi=300)
         plt.show()
         plt.close()
 
@@ -49,6 +49,6 @@ class Plotter:
         plt.xlabel('Residues', labelpad=30)
         plt.ylabel('Kcal/mol', labelpad=15)
         plt.tight_layout()
-        plt.savefig('receptor_gbsa.jpg')
+        plt.savefig('receptor_gbsa.jpg', dpi=300)
         plt.show()
         plt.close()

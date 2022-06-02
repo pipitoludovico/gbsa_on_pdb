@@ -18,5 +18,6 @@ def main():
     plotter = Plotter(sys.argv[1], file_reader)
     plotter.plot()
 
+
 if __name__ == '__main__':
     main()
