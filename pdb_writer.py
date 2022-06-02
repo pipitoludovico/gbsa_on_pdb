@@ -10,9 +10,12 @@ def lig_writer(filename2):
                     continue
                 if (str(lines.split()[3] + " " + str(lines[22:27].strip()))) in lig_dec_residue[keys]:
                     b_value = lig_dec_residue[keys][(lines.split()[3] + " " + str(lines[22:27].strip()))]
-                    b_value = round(float(b_value), 2)
+                    b_value = round(float(b_value), 1)
                     l_second_part = float(b_value)
-                    pdb_cont.write(lines[0:62] + str(round(float(l_second_part), 2)) + f"      {keys}" '\n')
+                    if str(l_second_part).startswith("-"):
+                        pdb_cont.write(lines[0:62] + str(round(float(l_second_part), 2)) + f"     {keys}" '\n')
+                    else:
+                        pdb_cont.write(lines[0:62] + str(round(float(l_second_part), 2)) + f"      {keys}" '\n')
 
         pdb_cont.write(lines)
     pdb_cont.close()
@@ -27,9 +30,12 @@ def rec_writer(filename):
                     continue
                 elif (str(lines.split()[3] + " " + str(lines[22:27].strip()))) in recept_dec_residue[keys]:
                     b_value = recept_dec_residue[keys][(lines.split()[3] + " " + str(lines[22:27].strip()))]
-                    b_value = round(float(b_value), 2)
+                    b_value = round(float(b_value), 1)
                     l_second_part = float(b_value)
-                    pdb_cont.write(lines[0:62] + str(round(float(l_second_part), 2)) + f"      {keys}" '\n')
+                    if str(l_second_part).startswith("-"):
+                        pdb_cont.write(lines[0:62] + str(round(float(l_second_part), 2)) + f"     {keys}" '\n')
+                    else:
+                        pdb_cont.write(lines[0:62] + str(round(float(l_second_part), 2)) + f"      {keys}" '\n')
+
         pdb_cont.write(lines)
     pdb_cont.close()
-    print(recept_dec_residue)
