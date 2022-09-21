@@ -20,10 +20,8 @@ def decomp_reader(datfile, ligand, receptor, file_reader):
                     lig_num.append(line_lig[22:27].strip())
                 if line_lig[72:75].strip() not in lig_dec_residue:
                     lig_dec_residue[str(line_lig[72:75].strip())] = {}
-                if (line_lig.split()[3] + " " + line_lig[22:27].strip()) not in lig_dec_residue[
-                    str(line_lig[72:75].strip())]:
-                    lig_dec_residue[str(line_lig[72:75].strip())][
-                        line_lig.split()[3] + " " + line_lig[22:27].strip()] = 0
+                if (line_lig.split()[3] + " " + line_lig[22:27].strip()) not in lig_dec_residue[str(line_lig[72:75].strip())]:
+                    lig_dec_residue[str(line_lig[72:75].strip())][line_lig.split()[3] + " " + line_lig[22:27].strip()] = 0
 
     with open(receptor, 'r') as r:
         header_r = r.readlines()[1:]
@@ -33,12 +31,11 @@ def decomp_reader(datfile, ligand, receptor, file_reader):
                     rec_num.append(line_r[22:27].strip())
                 if line_r[72:75].strip() not in recept_dec_residue:
                     recept_dec_residue[str(line_r[72:75].strip())] = {}
-                if (line_r.split()[3] + " " + line_r[22:27].strip()) not in recept_dec_residue[
-                    str(line_r[72:75].strip())]:
+                if (line_r.split()[3] + " " + line_r[22:27].strip()) not in recept_dec_residue[str(line_r[72:75].strip())]:
                     recept_dec_residue[str(line_r[72:75].strip())][line_r.split()[3] + " " + line_r[22:27].strip()] = 0
 
     with open(datfile, 'r') as f:
-        noheader = f.readlines()[8:]
+        noheader = f.readlines()[7:]
         x = 0
         for lines in noheader:
             if lines == "" or lines == " " or lines == "\n":
@@ -48,9 +45,10 @@ def decomp_reader(datfile, ligand, receptor, file_reader):
                     if (lines.split()[0]) + " " + lig_num[x] in lig_dec_residue[key]:
                         lig_dec_residue[key][(lines.split()[0]) + " " + lig_num[x]] = (lines.split(",")[17])
                     x += 1
-
         y = 0
+        noheader = f.readlines()[7:]
         for lines in noheader:
+            print(lines)
             if lines == "" or lines == " " or lines == "\n":
                 break
             if lines.split(",")[1][0] == "R":
@@ -58,4 +56,5 @@ def decomp_reader(datfile, ligand, receptor, file_reader):
                     if (lines.split()[0]) + " " + rec_num[y] in recept_dec_residue[key]:
                         recept_dec_residue[key][(lines.split()[0]) + " " + rec_num[y]] = (lines.split(",")[17])
                     y += 1
+
     return recept_dec_residue, lig_dec_residue
