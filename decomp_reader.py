@@ -36,22 +36,22 @@ def decomp_reader(datfile, ligand, receptor, file_reader):
 
     with open(datfile, 'r') as f:
         noheader = f.readlines()[7:]
-        x = 0
+
         for lines in noheader:
             if lines == "" or lines == " " or lines == "\n":
                 break
             if lines.split(",")[1][0] == "L":
+                x = 0
                 for key in lig_dec_residue.keys():
                     if (lines.split()[0]) + " " + lig_num[x] in lig_dec_residue[key]:
                         lig_dec_residue[key][(lines.split()[0]) + " " + lig_num[x]] = (lines.split(",")[17])
                     x += 1
-        y = 0
         noheader = f.readlines()[7:]
         for lines in noheader:
-            print(lines)
             if lines == "" or lines == " " or lines == "\n":
                 break
             if lines.split(",")[1][0] == "R":
+                y = 0
                 for key in recept_dec_residue.keys():
                     if (lines.split()[0]) + " " + rec_num[y] in recept_dec_residue[key]:
                         recept_dec_residue[key][(lines.split()[0]) + " " + rec_num[y]] = (lines.split(",")[17])
