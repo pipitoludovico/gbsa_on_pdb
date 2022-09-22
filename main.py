@@ -7,15 +7,25 @@ from single_gbsa_plotter import *
 
 """ usage: FINAL_DECOMP_MMPBSA.dat your_GBSA_ligand.pdb your_GBSA_receptor.pdb"""
 
+cwd = os.getcwd()
+script_dir = os.path.dirname(__file__)
+
+ligand = "ligand.pdb"
+receptor = "receptor.pdb"
+data = "FINAL_DECOMP_MMPBSA.dat"
+
+ligand_abs_file_path = os.path.join(script_dir, ligand)
+receptor_abs_file_path = os.path.join(script_dir, receptor)
+data_abs_file_path = os.path.join(script_dir, data)
 
 def main():
-    file_reader = FileReader(sys.argv[3], sys.argv[2])
-    decomp_reader(sys.argv[1], sys.argv[2], sys.argv[3], file_reader)
-    lig_reader(sys.argv[2])
-    rec_reader(sys.argv[3])
-    lig_writer(sys.argv[2])
-    rec_writer(sys.argv[3])
-    plotter = Plotter(sys.argv[1], file_reader)
+    file_reader = FileReader(receptor_abs_file_path, ligand_abs_file_path)
+    decomp_reader(data_abs_file_path, ligand_abs_file_path, receptor_abs_file_path, file_reader)
+    lig_reader(ligand_abs_file_path)
+    rec_reader(receptor_abs_file_path)
+    lig_writer(ligand_abs_file_path)
+    rec_writer(receptor_abs_file_path)
+    plotter = Plotter(data_abs_file_path, file_reader)
     plotter.plot()
 
 
