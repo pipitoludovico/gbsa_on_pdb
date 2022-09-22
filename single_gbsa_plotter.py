@@ -23,7 +23,6 @@ class Plotter:
                     break
                 if lines.split(",")[1][0] == "L":
                     df = pd.read_csv('total_purged.csv', sep=',', header=5, usecols=['Residue', 'Location', 'TOTAL'])
-                    # print(df)
                     df = df.loc[(df['TOTAL'] <= -0.25) & df['Location'].str.startswith("L")]
                     df.dropna(how='all', inplace=True)
                     df.set_index('Location', inplace=True)

@@ -7,7 +7,7 @@ rec_num = []
 
 
 def decomp_reader(datfile, ligand, receptor, file_reader):
-    os.system(f"cp {datfile}"  " FINAL_MMPBSA_bk.dat")
+    # os.system(f"cp {datfile}"  " FINAL_MMPBSA_bk.dat")
     os.system(f"sed -i 's/HSP/HIS/g' {datfile}")
     os.system(f"sed -i 's/HSE/HIS/g' {datfile}")
     os.system(f"sed -i 's/HSD/HIS/g' {datfile}")
@@ -38,7 +38,7 @@ def decomp_reader(datfile, ligand, receptor, file_reader):
                     recept_dec_residue[str(line_r[72:75].strip())][line_r.split()[3] + " " + line_r[22:27].strip()] = 0
 
     with open(datfile, 'r') as f:
-        noheader = f.readlines()[7:]
+        noheader = f.readlines()[8:]
 
         for lines in noheader:
             if lines == "" or lines == " " or lines == "\n":
@@ -50,11 +50,11 @@ def decomp_reader(datfile, ligand, receptor, file_reader):
                         lig_dec_residue[key][(lines.split()[0]) + " " + lig_num[x]] = (lines.split(",")[17])
                     x += 1
 
-        y = 0
         for lines in noheader:
             if lines == "" or lines == " " or lines == "\n":
                 break
             elif lines.split(",")[1][0] == "R":
+                y = 0
                 for key in recept_dec_residue.keys():
                     if (lines.split()[0]) + " " + rec_num[y] in recept_dec_residue[key]:
                         recept_dec_residue[key][(lines.split()[0]) + " " + rec_num[y]] = (lines.split(",")[17])
