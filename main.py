@@ -10,16 +10,25 @@ from single_gbsa_plotter import *
 cwd = os.getcwd()
 script_dir = os.path.dirname(__file__)
 
-os.system('pdb_seg -L ligand.pdb > ligandL.pdb')
-os.system('pdb_seg -R receptor.pdb > receptorR.pdb')
-
-ligand = "ligandL.pdb"
-receptor = "receptorR.pdb"
 data = "FINAL_DECOMP_MMPBSA.dat"
+
+if len(sys.argv) > 1:
+    if sys.argv[1] == 'unify':
+        os.system('pdb_seg -L ligand.pdb > ligandL.pdb')
+        os.system('pdb_seg -R receptor.pdb > receptorR.pdb')
+
+        ligand = "ligandL.pdb"
+        receptor = "receptorR.pdb"
+    else:
+        print('add "unify" to set a single segid for the ligand and a single segid for the receptor')
+else:
+    ligand = "ligand.pdb"
+    receptor = "receptor.pdb"
 
 ligand_abs_file_path = os.path.join(script_dir, ligand)
 receptor_abs_file_path = os.path.join(script_dir, receptor)
 data_abs_file_path = os.path.join(script_dir, data)
+
 
 def main():
     file_reader = FileReader(receptor_abs_file_path, ligand_abs_file_path)
