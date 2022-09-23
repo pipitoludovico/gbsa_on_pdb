@@ -20,7 +20,7 @@ if len(sys.argv) > 1:
         ligand = "ligandL.pdb"
         receptor = "receptorR.pdb"
     else:
-        print('add "unify" to set a single segid for the ligand and a single segid for the receptor')
+        print('add "unify" if you want to set a single segid for the ligand and a single segid for the receptor')
 else:
     ligand = "ligand.pdb"
     receptor = "receptor.pdb"
@@ -32,7 +32,7 @@ data_abs_file_path = os.path.join(script_dir, data)
 
 def main():
     file_reader = FileReader(receptor_abs_file_path, ligand_abs_file_path)
-    decomp_reader(data_abs_file_path, ligand_abs_file_path, receptor_abs_file_path, file_reader)
+    decomp_reader(data_abs_file_path)
     lig_reader(ligand_abs_file_path)
     rec_reader(receptor_abs_file_path)
     lig_writer(ligand_abs_file_path)
