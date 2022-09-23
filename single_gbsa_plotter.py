@@ -19,7 +19,7 @@ class Plotter:
                     break
             decomp_purged.close()
 
-        with open("total_purged.csv", 'r') as purged:
+        with open("total_purged.csv", 'rU') as purged:
             for lines in purged.readlines():
                 try:
                     header = 6

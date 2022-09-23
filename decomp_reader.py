@@ -16,7 +16,7 @@ def decomp_reader(datfile):
                 if lines == "" or lines == " " or lines == "\n":
                     break
                 if lines.split()[1].split(',')[1] == "R":
-                    FileReader.receptor_id[key][FileReader.starting_rec[x]] = (lines.split(",")[17])
+                    FileReader.receptor_id[key][FileReader.starting_rec[x]] = abs(float(lines.split(",")[17]))
                     x += 1
 
         for key in FileReader.ligand_id.keys():
@@ -25,8 +25,7 @@ def decomp_reader(datfile):
                 if lines == "" or lines == " " or lines == "\n":
                     break
                 if lines.split()[1].split(',')[1] == "L":
-                    # FileReader.ligand_id[key][((lines.split(',')[0]).split()[0] + " " + FileReader.starting_lig[y])] = (
-                    FileReader.ligand_id[key][FileReader.starting_lig[y]] = (lines.split(",")[17])
+                    FileReader.ligand_id[key][FileReader.starting_lig[y]] = abs(float(lines.split(",")[17]))
                     y += 1
 
     return FileReader.receptor_id, FileReader.ligand_id
