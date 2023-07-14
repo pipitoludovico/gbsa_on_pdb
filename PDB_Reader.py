@@ -28,7 +28,8 @@ class Parser:
             for line in ligand.readlines():
                 if line.startswith('ATOM'):
                     segid = str(line[72:75].strip())
-                    value = line.split()[3].strip() + " " + line.split()[5].strip()
+                    value = line[17:20].strip() + " " + line[22:26].strip()
+                    print("Value:", value)
                     if segid not in self.ligand_residues_list:
                         self.ligand_residues_list[segid] = []
                     if value not in self.ligand_residues_list[segid]:
@@ -39,7 +40,7 @@ class Parser:
             for line in ligand.readlines():
                 if line.startswith('ATOM'):
                     segid = str(line[72:75].strip())
-                    value = line.split()[3].strip() + " " + line.split()[5].strip()
+                    value = line[17:20].strip() + " " + line[22:26].strip()
                     if segid not in self.receptor_residues_list:
                         self.receptor_residues_list[segid] = []
                     if value not in self.receptor_residues_list[segid]:

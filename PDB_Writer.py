@@ -10,20 +10,20 @@ class DataWriter:
         self.WriteGBSAonPDB()
 
     def WriteDat(self):
-
-        for file_name, decomp_results in zip(self.files, self.results):
-            i = 0
-            with open(file_name, 'w') as file:
-                file.write('Residue\tGBSA\n')
-                if file_name == 'ligand.dat':
-                    data_dict = self.ligandList
-                elif file_name == 'receptor.dat':
-                    data_dict = self.receptorList
-
-                for segid, res_list in data_dict.items():
-                    for res in res_list:
-                        file.write(res + "\t" + str(decomp_results[i]) + '\n')
-                        i += 1
+        i = 0
+        with open('ligand.dat', 'w') as file:
+            file.write('Residue\tGBSA\n')
+            for segid, res_list in self.ligandList.items():
+                for res in res_list:
+                    file.write(res + "\t" + str(self.ligandDecompResults[i]) + '\n')
+                    i += 1
+        i = 0
+        with open('receptor.dat', 'w') as file:
+            file.write('Residue\tGBSA\n')
+            for segid, res_list in self.receptorList.items():
+                for res in res_list:
+                    file.write(res + "\t" + str(self.recDecompResults[i]) + '\n')
+                    i += 1
 
     def WriteGBSAonPDB(self):
         with open('ligand.pdb', 'r') as input_file, open('GBSA_on_PDB.pdb', 'w') as output_file:
