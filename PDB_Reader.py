@@ -29,7 +29,6 @@ class Parser:
                 if line.startswith('ATOM'):
                     segid = str(line[72:75].strip())
                     value = line[17:20].strip() + " " + line[22:26].strip()
-                    print("Value:", value)
                     if segid not in self.ligand_residues_list:
                         self.ligand_residues_list[segid] = []
                     if value not in self.ligand_residues_list[segid]:
